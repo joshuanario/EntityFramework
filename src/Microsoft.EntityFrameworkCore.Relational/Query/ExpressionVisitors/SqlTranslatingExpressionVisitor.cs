@@ -983,6 +983,12 @@ namespace Microsoft.EntityFrameworkCore.Query.ExpressionVisitors
                     : expression;
             }
 
+            var nullConditional = expression as NullConditionalExpression;
+            if (nullConditional != null)
+            {
+                return Visit(nullConditional.AccessOperation);
+            }
+
             return base.VisitExtension(expression);
         }
 
